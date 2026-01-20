@@ -1,3 +1,4 @@
+
 from flask import Flask, request, jsonify
 import pandas as pd
 import numpy as np
@@ -7,34 +8,14 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask_cors import CORS
+from Topsis_Sanyam_102303059.topsis import topsis
 
 app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# TOPSIS logic (adapted from topsis.py)
-def topsis(df, weights, impacts):
-    matrix = df.iloc[:, 1:].values
-    normalized = matrix / np.sqrt((matrix ** 2).sum(axis=0))
-    weights_array = np.array(weights)
-    weighted_normalized = normalized * weights_array
-    ideal_best = np.zeros(len(weights))
-    ideal_worst = np.zeros(len(weights))
-    for i, impact in enumerate(impacts):
-        if impact == '+':
-            ideal_best[i] = weighted_normalized[:, i].max()
-            ideal_worst[i] = weighted_normalized[:, i].min()
-        else:
-            ideal_best[i] = weighted_normalized[:, i].min()
-            ideal_worst[i] = weighted_normalized[:, i].max()
-    separation_best = np.sqrt(((weighted_normalized - ideal_best) ** 2).sum(axis=1))
-    separation_worst = np.sqrt(((weighted_normalized - ideal_worst) ** 2).sum(axis=1))
-    topsis_score = separation_worst / (separation_best + separation_worst)
-    rank = np.argsort(-topsis_score) + 1
-    final_rank = np.empty_like(rank)
-    final_rank[np.argsort(-topsis_score)] = np.arange(1, len(rank) + 1)
-    return topsis_score, final_rank
+## Using topsis from PyPI package
 
 
 

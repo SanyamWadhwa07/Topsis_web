@@ -246,6 +246,39 @@ cat result.csv
 
 ---
 
+# topsis-Sanyam-102303059
+
+A Python library for TOPSIS multi-criteria decision analysis (by Sanyam, 102303059).
+
+## Installation
+```bash
+pip install topsis-Sanyam-102303059
+```
+
+## Usage
+```python
+import pandas as pd
+from topsis_Sanyam_102303059 import topsis
+
+data = pd.DataFrame({
+    'Model': ['M1', 'M2', 'M3'],
+    'P1': [250, 200, 300],
+    'P2': [16, 16, 32],
+    'P3': [12, 8, 16],
+    'P4': [5, 3, 4],
+    'P5': [5, 3, 4]
+})
+weights = [1, 1, 1, 1, 1]
+impacts = ['+', '+', '+', '-', '-']
+result = topsis(data, weights, impacts)
+print(result)
+```
+
+## License
+MIT
+
+---
+
 **Developed by:** Sanyam Wadhwa  
 **Roll Number:** 102303059  
-**Class:** 3C12  
+**Class:** 3C12
