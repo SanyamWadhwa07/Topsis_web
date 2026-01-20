@@ -6,7 +6,13 @@ import os
 from Topsis_Sanyam_102303059.topsis import topsis
 
 app = Flask(__name__)
-CORS(app)
+CORS(
+    app,
+    resources={r"/*": {"origins": "*"}},
+    allow_headers=["Content-Type", "Authorization"],
+    methods=["GET", "POST", "OPTIONS"]
+)
+
 
 @app.route("/", methods=["GET"])
 def health():

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import "./App.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
+
 
 function App() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [csvFile, setCsvFile] = useState(null);
   const [weights, setWeights] = useState("");
   const [impacts, setImpacts] = useState("");
