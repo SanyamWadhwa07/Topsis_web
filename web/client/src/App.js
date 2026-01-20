@@ -48,6 +48,13 @@ function App() {
       <div className="topsis-title">TOPSIS WEB SERVICE</div>
       <div className="topsis-subtitle">MULTI-CRITERIA DECISION ANALYSIS TOOL</div>
       <form className="topsis-form" onSubmit={handleSubmit}>
+        <a
+          href="/sample.csv"
+          download="sample.csv"
+          style={{ marginBottom: "10px", display: "block" }}
+        >
+          Download Sample CSV File
+        </a>
         <label>UPLOAD CSV FILE *</label>
         <input type="file" accept=".csv" onChange={e => setCsvFile(e.target.files[0])} required />
         <div className="input-desc">First column: option names, remaining columns: numeric criteria values</div>
