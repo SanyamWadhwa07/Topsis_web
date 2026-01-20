@@ -1,22 +1,40 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pandas as pd
-import numpy as np
 import os
 from Topsis_Sanyam_102303059.topsis import topsis
 
 app = Flask(__name__)
+
+# ✅ Explicit origins (required for Vercel + Render)
 CORS(
     app,
-    resources={r"/*": {"origins": "*"}},
-    allow_headers=["Content-Type", "Authorization"],
-    methods=["GET", "POST", "OPTIONS"]
+    origins=[
+        "http://localhost:3000",
+        "https://topsis-web-onoy.vercel.app"
+    ],
+    supports_credentials=True
 )
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin", "*")
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    return response
 
 
 @app.route("/", methods=["GET"])
 def health():
     return "TOPSIS backend running"
+
+
+# ✅ Preflight handler (VERY IMPORTANT)
+@app.route("/process", methods=["OPTIONS"])
+def process_options():
+    return jsonify({"status": "ok"}), 200
+
+
 @app.route("/process", methods=["POST"])
 def process():
     file = request.files.get("csvfile")
@@ -37,7 +55,7 @@ def process():
     except Exception:
         return jsonify({"error": "Invalid weights or impacts format"}), 400
 
-    # Ensure numeric criteria
+    # Convert criteria columns to numeric
     try:
         criteria_df = df.iloc[:, 1:].apply(pd.to_numeric, errors="raise")
     except Exception:
@@ -62,8 +80,6 @@ def process():
     clean_df["Topsis Score"] = scores
     clean_df["Rank"] = ranks.astype(int)
 
-    result_html = clean_df.to_html(index=False)
-
     summary = "\n".join(
         f"Rank {int(row['Rank'])}: {row[clean_df.columns[0]]} "
         f"(Score: {row['Topsis Score']:.4f})"
@@ -71,7 +87,7 @@ def process():
     )
 
     return jsonify({
-        "table": result_html,
+        "table": clean_df.to_html(index=False),
         "summary": summary
     })
 
