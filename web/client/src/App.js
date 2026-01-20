@@ -19,7 +19,7 @@ function App() {
     formData.append('weights', weights);
     formData.append('impacts', impacts);
     // Send to backend for calculation
-    const res = await fetch('http://localhost:5000/process', {
+    const res = await fetch('https://topsis-web-jrzk.onrender.com/process', {
       method: 'POST',
       body: formData,
     });
@@ -49,7 +49,7 @@ function App() {
       <div className="topsis-subtitle">MULTI-CRITERIA DECISION ANALYSIS TOOL</div>
       <form className="topsis-form" onSubmit={handleSubmit}>
         <a
-          href="/sample.csv"
+          href="/static/sample.csv"
           download="sample.csv"
           style={{ marginBottom: "10px", display: "block" }}
         >
