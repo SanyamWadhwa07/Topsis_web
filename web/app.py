@@ -1,3 +1,5 @@
+from flask import send_from_directory
+
 
 from flask import Flask, request, jsonify
 import pandas as pd
@@ -96,6 +98,12 @@ def serve_react(path):
         return send_from_directory(build_dir, path)
     else:
         return send_from_directory(build_dir, 'index.html')
+
+# Serve static files (e.g., sample.csv)
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    static_dir = os.path.join(os.path.dirname(__file__), 'static')
+    return send_from_directory(static_dir, filename)
 
 if __name__ == '__main__':
     import os

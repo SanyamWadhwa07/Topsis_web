@@ -103,5 +103,3 @@ Desktop.ini
 *.swp
 *.swo
 
-# Ignore sample data
-sample.csv
