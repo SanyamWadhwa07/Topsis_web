@@ -87,5 +87,15 @@ def send_email(to_email, html_content):
     except Exception as e:
         print(f"Email error: {e}")
 
+from flask import send_from_directory
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react(path):
+    build_dir = os.path.join(os.path.dirname(__file__), 'build')
+    if path != "" and os.path.exists(os.path.join(build_dir, path)):
+        return send_from_directory(build_dir, path)
+    else:
+        return send_from_directory(build_dir, 'index.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

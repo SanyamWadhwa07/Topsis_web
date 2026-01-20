@@ -1,0 +1,6 @@
+Flask
+flask_cors
+pandas
+numpy
+Werkzeug
+Topsis-Sanyam-102303059
