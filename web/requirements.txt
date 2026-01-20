@@ -1,6 +1,6 @@
-Flask
-flask_cors
+flask
+flask-cors
 pandas
 numpy
-Werkzeug
+gunicorn
 Topsis-Sanyam-102303059
