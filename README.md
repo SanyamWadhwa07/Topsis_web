@@ -6,6 +6,18 @@
 
 ---
 
+## 🔗 Project Links
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/SanyamWadhwa07/topsis_Sanyam_102303059)
+[![PyPI](https://img.shields.io/badge/PyPI-Package-3775A9?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/topsis-Sanyam-102303059/)
+[![Web App](https://img.shields.io/badge/Web-Application-000000?style=for-the-badge&logo=vercel)](https://topsis-web-onoy.vercel.app/)
+
+- **GitHub Repository:** [https://github.com/SanyamWadhwa07/topsis_Sanyam_102303059](https://github.com/SanyamWadhwa07/topsis_Sanyam_102303059)
+- **PyPI Package:** [https://pypi.org/project/topsis-Sanyam-102303059/](https://pypi.org/project/topsis-Sanyam-102303059/)
+- **Web Application:** [https://topsis-web-onoy.vercel.app/](https://topsis-web-onoy.vercel.app/)
+
+---
+
 ## Introduction
 
 This project implements **TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution)** as a command-line Python program for multi-criteria decision analysis.
@@ -54,6 +66,12 @@ Higher score = Better rank (Rank 1 is best)
 
 ## Installation
 
+### Install from PyPI
+```bash
+pip install topsis-Sanyam-102303059
+```
+
+### Install Dependencies (for development)
 ```bash
 pip install pandas numpy
 ```
@@ -62,14 +80,41 @@ pip install pandas numpy
 
 ## Usage
 
-### Syntax:
+### Command-Line Interface
+
+#### Syntax:
 ```bash
 python topsis.py <InputFile> <Weights> <Impacts> <OutputFile>
 ```
 
-### Example:
+#### Example:
 ```bash
 python topsis.py data.csv "1,1,1,2,1" "+,+,-,+,+" result.csv
+```
+
+### Python Library Usage
+
+```python
+import pandas as pd
+from topsis_Sanyam_102303059 import topsis
+
+# Create sample data
+data = pd.DataFrame({
+    'Model': ['M1', 'M2', 'M3'],
+    'P1': [250, 200, 300],
+    'P2': [16, 16, 32],
+    'P3': [12, 8, 16],
+    'P4': [5, 3, 4],
+    'P5': [5, 3, 4]
+})
+
+# Define weights and impacts
+weights = [1, 1, 1, 1, 1]
+impacts = ['+', '+', '+', '-', '-']
+
+# Run TOPSIS
+result = topsis(data, weights, impacts)
+print(result)
 ```
 
 ---
@@ -197,9 +242,6 @@ python topsis.py data.csv "1,1,1,1,1" "-,+,+,+,+" result.csv
 - Despite highest price (300), overall value justifies the cost
 - M4 is close second with same storage but lower camera quality
 
-
-**Developed by:** Sanyam Wadhwa (102303059) - Group 3C12
-
 ---
 
 ## Applications
@@ -227,7 +269,10 @@ TOPSIS-Project/
 ## Quick Start
 
 ```bash
-# 1. Install dependencies
+# 1. Install from PyPI
+pip install topsis-Sanyam-102303059
+
+# OR install dependencies for development
 pip install pandas numpy
 
 # 2. Run program
@@ -246,35 +291,8 @@ cat result.csv
 
 ---
 
-# topsis-Sanyam-102303059
-
-A Python library for TOPSIS multi-criteria decision analysis (by Sanyam, 102303059).
-
-## Installation
-```bash
-pip install topsis-Sanyam-102303059
-```
-
-## Usage
-```python
-import pandas as pd
-from topsis_Sanyam_102303059 import topsis
-
-data = pd.DataFrame({
-    'Model': ['M1', 'M2', 'M3'],
-    'P1': [250, 200, 300],
-    'P2': [16, 16, 32],
-    'P3': [12, 8, 16],
-    'P4': [5, 3, 4],
-    'P5': [5, 3, 4]
-})
-weights = [1, 1, 1, 1, 1]
-impacts = ['+', '+', '+', '-', '-']
-result = topsis(data, weights, impacts)
-print(result)
-```
-
 ## License
+
 MIT
 
 ---
